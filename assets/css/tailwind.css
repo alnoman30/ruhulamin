@@ -1,0 +1,554 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/ClashGrotesk-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/ClashGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/ClashGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/ClashGrotesk-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Clash Grotesk';
+  src: url('../fonts/ClashGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+
+@theme {
+  --color-black: #000;
+  --color-white: #ffffff;
+  --color-dark2: #383838;
+  --color-dark1: #161615;
+  --color-main: #1F5CBF;
+  --color-red: #ED1C24;
+  --color-green: #7AB442;
+  --color-gray2: #BFC0C6;
+
+
+  --font-clash: "Clash Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+
+
+
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  max-width: 1650px;
+  width: 100%;
+  margin: auto;
+  padding-inline: 20px;
+}
+
+@media (max-width:640px) {
+  .container {
+    padding-inline: 16px;
+  }
+}
+
+
+
+@layer base {
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.section-padding {
+  padding-block: 96px;
+}
+
+@media (max-width:1024px) {
+  .section-padding {
+    padding-block: 60px;
+  }
+}
+
+@media (max-width:640px) {
+  .section-padding {
+    padding-block: 48px;
+  }
+}
+
+
+
+/* =========================
+   CSS RESET / BASE
+========================= */
+
+/* Box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin & padding */
+
+/* HTML & body */
+body {
+  height: 100%;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+
+
+/* Remove link underline */
+a {
+  text-decoration: none;
+}
+
+/* Images responsive */
+img,
+picture,
+video,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+/* Form elements inherit font */
+
+
+/* Button cursor */
+button {
+  cursor: pointer;
+}
+
+/* Table reset */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* smooth scrooll */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
+  transition: transform .35s ease,
+    background-color .3s ease,
+    box-shadow .3s ease;
+}
+
+#navbar.navbar--hidden {
+  transform: translateY(-100%);
+}
+
+#navbar.navbar--scrolled {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, .95);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, .08);
+}
+
+#navbar.navbar--menu-open:not(.navbar--scrolled) {
+  background: #fff;
+}
+
+/* =========================
+   DESKTOP LAYOUT
+========================= */
+
+.navbar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-logo-wrap {
+  justify-self: start;
+}
+
+.navbar-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width:1200px) {
+  .navbar-logo {
+    max-width: 200px;
+  }
+}
+
+@media (max-width:640px) {
+  .navbar-logo {
+    max-width: 150px;
+  }
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 15px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 170%;
+  color: var(--color-dark2);
+  transition: all .2s ease;
+}
+
+@media(max-width:1200px) {
+  .nav-item a {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+}
+
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--color-red);
+  transform: scale(0);
+  opacity: 0;
+  transition: all .25s ease;
+}
+
+.nav-item.active a,
+.nav-item a:hover {
+  color: var(--color-red);
+  font-weight: 700;
+
+}
+
+.nav-item.active .nav-dot,
+.nav-item a:hover .nav-dot {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* =========================
+   CTA BUTTON
+========================= */
+
+.navbar-cta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: 'Clash Grotesk';
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 132%;
+  color: #fff;
+  background: var(--color-black);
+  transition: .25s ease;
+}
+
+.navbar-cta:hover {
+  background: var(--color-main);
+  color: #fff;
+}
+
+.navbar-cta:hover .upwork-img {
+  filter: brightness(0) invert(1);
+}
+
+.cta-text {
+  white-space: nowrap;
+}
+
+/* =========================
+   ARROW ANIMATION
+========================= */
+
+.cta-arrow-wrap {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.cta-arrow-wrap svg {
+  position: absolute;
+  inset: 0;
+  transition: transform .32s cubic-bezier(.4, 0, .2, 1);
+}
+
+.arrow-cur {
+  transform: translate(0, 0);
+}
+
+.arrow-nxt {
+  transform: translate(-130%, 130%);
+}
+
+.navbar-cta:hover .arrow-cur {
+  transform: translate(130%, -130%);
+}
+
+.navbar-cta:hover .arrow-nxt {
+  transform: translate(0, 0);
+}
+
+/* Hover states */
+/*  banner start */
+/* ── Arrow wrap ── */
+.cta-arrow-wrap {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cta-arrow-wrap svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Current arrow — sitting at center */
+.arrow-cur {
+  transform: translate(0, 0);
+}
+
+.btn-secondary .arrow-nxt {
+  transform: translate(-130%, 0);
+}
+
+/* Hover states */
+.btn-primary:hover .arrow-cur {
+  transform: translate(130%, -130%);
+}
+
+.btn-primary:hover .arrow-nxt {
+  transform: translate(0, 0);
+}
+
+.btn-secondary:hover .arrow-cur {
+  transform: translate(130%, 0);
+}
+
+.btn-secondary:hover .arrow-nxt {
+  transform: translate(0, 0);
+}
+
+/* =========================
+   HAMBURGER
+========================= */
+
+#hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+}
+
+.ham-top,
+.ham-mid,
+.ham-bot {
+  position: absolute;
+  height: 1.5px;
+  background: #000;
+  border-radius: 2px;
+  transition: .3s ease;
+}
+
+.ham-top {
+  width: 24px;
+  transform: translateY(-7px);
+}
+
+.ham-mid {
+  width: 24px;
+}
+
+.ham-bot {
+  width: 16px;
+  transform: translateY(7px);
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+#mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease;
+  background: var(--color-main);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.mobile-menu-inner ul {
+  padding: 12px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.mobile-menu-inner ul li a {
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.mobile-menu-inner ul li a:hover {
+  color: var(--color-dark2);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 991px) {
+
+  .navbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-right .navbar-cta {
+    display: none;
+  }
+
+  #hamburger {
+    display: flex;
+  }
+}
+
+@media (min-width: 992px) {
+  #mobile-menu {
+    display: none;
+  }
+}
