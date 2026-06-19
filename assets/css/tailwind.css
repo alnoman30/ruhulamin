@@ -564,4 +564,24 @@ html.lenis body {
 }
 
 
-/* hero title */
+/* testimonial */
+.custom-pagination-bars .splide__pagination__page {
+    background: #1F5CBF !important;
+    border: none !important;
+    border-radius: 4px !important;
+    width: 48px !important;
+    height: 8px !important;
+    border-radius: 999px !important;
+    opacity: 0.4 !important;
+    padding: 0;
+    margin: 0;
+    transition: background-color 0.3s ease, width 0.3s ease;
+  }
+  .custom-pagination-bars .splide__pagination__page.is-active {
+    background: #1F5CBF !important;
+    transform: scale(1) !important;
+    opacity: 1 !important;
+  }
+
+
+  
