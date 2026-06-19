@@ -40,6 +40,14 @@
   font-display: swap;
 }
 
+@font-face {
+    font-family: 'Relevance-trial';
+    src: url('../fonts/Relevance-trial-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 @import "tailwindcss";
 
 
@@ -55,7 +63,8 @@
   
 
 
-  --font-clash: "Clash Grotesk", sans-serif;
+  --font-clash: "Clash Grotesk";
+  --font-relevance: 'Relevance-trial';
   --font-inter: "Inter", sans-serif;
 }
 
