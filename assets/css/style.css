@@ -390,6 +390,9 @@
   .mt-3 {
     margin-top: calc(var(--spacing) * 3);
   }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
   .mt-5 {
     margin-top: calc(var(--spacing) * 5);
   }
@@ -398,6 +401,9 @@
   }
   .mt-\[-140px\] {
     margin-top: -140px;
+  }
+  .mt-\[4\] {
+    margin-top: 4;
   }
   .mt-\[140px\] {
     margin-top: 140px;
@@ -720,6 +726,19 @@
   .gap-y-8 {
     row-gap: calc(var(--spacing) * 8);
   }
+  .divide-x {
+    :where(& > :not(:last-child)) {
+      --tw-divide-x-reverse: 0;
+      border-inline-style: var(--tw-border-style);
+      border-inline-start-width: calc(1px * var(--tw-divide-x-reverse));
+      border-inline-end-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
+    }
+  }
+  .divide-gray-300 {
+    :where(& > :not(:last-child)) {
+      border-color: var(--color-gray-300);
+    }
+  }
   .self-center {
     align-self: center;
   }
@@ -882,6 +901,9 @@
   .p-2\.75 {
     padding: calc(var(--spacing) * 2.75);
   }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
@@ -1029,6 +1051,10 @@
     --tw-leading: 100%;
     line-height: 100%;
   }
+  .leading-\[100\] {
+    --tw-leading: 100;
+    line-height: 100;
+  }
   .leading-\[120\%\] {
     --tw-leading: 120%;
     line-height: 120%;
@@ -1037,6 +1063,10 @@
     --tw-leading: 130%;
     line-height: 130%;
   }
+  .leading-\[130\] {
+    --tw-leading: 130;
+    line-height: 130;
+  }
   .leading-\[150\%\] {
     --tw-leading: 150%;
     line-height: 150%;
@@ -1044,6 +1074,14 @@
   .leading-\[160\%\] {
     --tw-leading: 160%;
     line-height: 160%;
+  }
+  .leading-\[160\] {
+    --tw-leading: 160;
+    line-height: 160;
+  }
+  .leading-\[170\%\] {
+    --tw-leading: 170%;
+    line-height: 170%;
   }
   .leading-none {
     --tw-leading: 1;
@@ -1106,6 +1144,9 @@
   }
   .text-main {
     color: var(--color-main);
+  }
+  .text-red {
+    color: var(--color-red);
   }
   .text-white {
     color: var(--color-white);
@@ -1265,6 +1306,11 @@
       }
     }
   }
+  .first\:pl-0 {
+    &:first-child {
+      padding-left: calc(var(--spacing) * 0);
+    }
+  }
   .hover\:bg-black {
     &:hover {
       @media (hover: hover) {
@@ -1326,6 +1372,11 @@
   .sm\:mb-6 {
     @media (width >= 40rem) {
       margin-bottom: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:mb-7 {
+    @media (width >= 40rem) {
+      margin-bottom: calc(var(--spacing) * 7);
     }
   }
   .sm\:mb-8 {
@@ -1503,6 +1554,11 @@
   .sm\:self-auto {
     @media (width >= 40rem) {
       align-self: auto;
+    }
+  }
+  .sm\:rounded-xl {
+    @media (width >= 40rem) {
+      border-radius: var(--radius-xl);
     }
   }
   .sm\:p-4 {
@@ -1779,6 +1835,11 @@
       row-gap: calc(var(--spacing) * 12);
     }
   }
+  .md\:rounded-2xl {
+    @media (width >= 48rem) {
+      border-radius: var(--radius-2xl);
+    }
+  }
   .md\:rounded-xl {
     @media (width >= 48rem) {
       border-radius: var(--radius-xl);
@@ -1799,6 +1860,11 @@
   .md\:p-6 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing) * 6);
+    }
+  }
+  .md\:p-8 {
+    @media (width >= 48rem) {
+      padding: calc(var(--spacing) * 8);
     }
   }
   .md\:px-4 {
@@ -2074,6 +2140,12 @@
   .lg\:px-16 {
     @media (width >= 64rem) {
       padding-inline: calc(var(--spacing) * 16);
+    }
+  }
+  .lg\:text-2xl {
+    @media (width >= 64rem) {
+      font-size: var(--text-2xl);
+      line-height: var(--tw-leading, var(--text-2xl--line-height));
     }
   }
   .lg\:text-lg {
@@ -2539,6 +2611,11 @@ html.lenis, html.lenis body {
   inherits: false;
   initial-value: 0;
 }
+@property --tw-divide-x-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -2765,11 +2842,6 @@ html.lenis, html.lenis body {
   syntax: "*";
   inherits: false;
 }
-@property --tw-divide-x-reverse {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -2785,6 +2857,7 @@ html.lenis, html.lenis body {
       --tw-skew-x: initial;
       --tw-skew-y: initial;
       --tw-space-y-reverse: 0;
+      --tw-divide-x-reverse: 0;
       --tw-border-style: solid;
       --tw-gradient-position: initial;
       --tw-gradient-from: #0000;
@@ -2837,7 +2910,6 @@ html.lenis, html.lenis body {
       --tw-backdrop-sepia: initial;
       --tw-duration: initial;
       --tw-ease: initial;
-      --tw-divide-x-reverse: 0;
     }
   }
 }

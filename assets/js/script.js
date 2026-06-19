@@ -297,127 +297,56 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 
+// Cursor follow on project card animation
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return;
+  safe('portfolio', function () {
+    if (!window.gsap) return;
+    const grid = document.getElementById('works-grid');
+    if (!grid) return;                         // bail on pages without portfolio
 
-  const grid = document.getElementById('works-grid');
-  if (!grid) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  /* =========================
-     SCROLL ANIMATIONS
-  ========================= */
-
-  gsap.from('.reveal-head', {
-    y: 30,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#works',
-      start: 'top 80%'
-    }
-  });
-
-  gsap.from('.work-card', {
-    y: 60,
-    opacity: 0,
-    duration: 0.8,
-    stagger: 0.15,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '#works-grid',
-      start: 'top 85%'
-    }
-  });
-
-  /* =========================
-     CURSOR VIEW WORK EFFECT
-  ========================= */
-
-  const medias = grid.querySelectorAll('.work-media');
-
-  medias.forEach((media) => {
-    const btn = media.querySelector('.view-work');
-    if (!btn) return;
-
-    // initial state
-    gsap.set(btn, {
-      xPercent: -50,
-      yPercent: -50,
-      scale: 0,
-      opacity: 0
+    gsap.from('.reveal-head', {
+      y: 30, opacity: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '#works', start: 'top 80%' }
+    });
+    gsap.from('.work-card', {
+      y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out',
+      scrollTrigger: { trigger: '#works-grid', start: 'top 85%' }
     });
 
-    const xTo = gsap.quickTo(btn, 'x', {
-      duration: 0.5,
-      ease: 'power3.out'
-    });
+    const medias  = [...grid.querySelectorAll('.work-media')];
+    const buttons = medias.map((m) => m.querySelector('.view-work')).filter(Boolean);
+    if (!medias.length) return;
 
-    const yTo = gsap.quickTo(btn, 'y', {
-      duration: 0.5,
-      ease: 'power3.out'
-    });
+    buttons.forEach((btn) =>
+      gsap.set(btn, { xPercent: -50, yPercent: -50, scale: 0, opacity: 0 })
+    );
 
-    const getPos = (e) => {
-      const rect = media.getBoundingClientRect();
-      return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
+    const showBtn = (btn) => gsap.to(btn, { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(1.8)' });
+    const hideBtn = (btn) => gsap.to(btn, { scale: 0, opacity: 0, duration: 0.3, ease: 'power2.in' });
+
+    medias.forEach((media) => {
+      const btn = media.querySelector('.view-work');
+      if (!btn) return;
+      const xTo = gsap.quickTo(btn, 'x', { duration: 0.5, ease: 'power3' });
+      const yTo = gsap.quickTo(btn, 'y', { duration: 0.5, ease: 'power3' });
+
+      const pos = (e) => {
+        const r = media.getBoundingClientRect();
+        return { x: e.clientX - r.left, y: e.clientY - r.top };
       };
-    };
 
-    const showBtn = () => {
-      gsap.to(btn, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.45,
-        ease: 'back.out(1.8)'
+      media.addEventListener('mouseenter', (e) => {
+        buttons.forEach((b) => { if (b !== btn) hideBtn(b); });
+        const p = pos(e);
+        gsap.set(btn, { x: p.x, y: p.y });
+        showBtn(btn);
       });
-    };
-
-    const hideBtn = () => {
-      gsap.to(btn, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      });
-    };
-
-    media.addEventListener('mouseenter', (e) => {
-      const pos = getPos(e);
-
-      gsap.set(btn, {
-        x: pos.x,
-        y: pos.y
-      });
-
-      showBtn();
+      media.addEventListener('mousemove', (e) => { const p = pos(e); xTo(p.x); yTo(p.y); });
+      media.addEventListener('mouseleave', () => hideBtn(btn));
     });
 
-    media.addEventListener('mousemove', (e) => {
-      const pos = getPos(e);
-      xTo(pos.x);
-      yTo(pos.y);
-    });
-
-    media.addEventListener('mouseleave', () => {
-      hideBtn();
-    });
-  });
-
-  /* Hide all when leaving grid */
-  grid.addEventListener('mouseleave', () => {
-    grid.querySelectorAll('.view-work').forEach((btn) => {
-      gsap.to(btn, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in'
-      });
-    });
+    grid.addEventListener('mouseleave', () => buttons.forEach(hideBtn));
   });
 });
