@@ -153,12 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 
+// animated svg
 document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".service-item");
+  const items = document.querySelectorAll(".magnet-item");
 
   items.forEach((item) => {
-    const icon = item.querySelector(".service-item-svg");
+    const icon = item.querySelector(".magnet-item-svg");
 
     let bounds;
     let targetX = 0;
@@ -211,3 +211,39 @@ document.addEventListener("DOMContentLoaded", () => {
     animate();
   });
 });
+
+// Hero banner image animation
+gsap.registerPlugin(ScrollTrigger);
+
+// Main person (chair rocking effect)
+gsap.to("#hero-main-person", {
+    x: -18,              // move slightly left
+    duration: 4,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    transformOrigin: "bottom center"
+});
+
+// Optional subtle body sway
+gsap.to("#hero-main-person", {
+    rotation: -1.2,
+    duration: 4,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    transformOrigin: "bottom center"
+});
+
+// AI Tool floating effect
+gsap.to("#hero-ai-tool", {
+    y: -12,
+    rotation: 1.5,
+    duration: 2.8,
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true
+});
+
+
+// 

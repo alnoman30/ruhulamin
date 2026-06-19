@@ -52,6 +52,7 @@
   --color-red: #ED1C24;
   --color-green: #7AB442;
   --color-gray2: #BFC0C6;
+  
 
 
   --font-clash: "Clash Grotesk", sans-serif;
@@ -552,3 +553,6 @@ html.lenis body {
     display: none;
   }
 }
+
+
+/* hero title */
