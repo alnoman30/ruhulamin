@@ -355,22 +355,24 @@ document.addEventListener('DOMContentLoaded', () => {
 // SplideJS testimonial
 document.addEventListener('DOMContentLoaded', function () {
   new Splide('#testimonial-carousel', {
-  type: 'slide',   // change from loop
-  perPage: 2,
-  perMove: 1,
-  autoplay: true,
-  interval: 5000,
-  pauseOnHover: false,
-  arrows: false,
-  pagination: true,
-  speed: 800,
-  gap: '32px',
-  breakpoints: {
-    768: {
-      perPage: 1,
-      gap: '1rem',
-      pagination: false,
+    type: 'slide',
+    perPage: 2,
+    perMove: 1,
+    autoplay: true,
+    interval: 5000,
+    pauseOnHover: false,
+    arrows: false, // desktop
+    pagination: true,
+    speed: 800,
+    gap: '32px',
+
+    breakpoints: {
+      768: {
+        perPage: 1,
+        gap: '1rem',
+        pagination: false,
+        arrows: true, // mobile
+      }
     }
-  }
-}).mount();
+  }).mount();
 });

@@ -583,5 +583,41 @@ html.lenis body {
     opacity: 1 !important;
   }
 
+/* Hide on desktop */
+.mobile-arrows {
+  display: none;
+}
 
+@media (max-width: 767px) {
+  .mobile-arrows {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .mobile-arrows .splide__arrow {
+    position: static !important;
+    transform: none !important;
+    border: 1px solid #1F5CBF !important;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: transparent;
+    color: #1F5CBF;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all linear .3s !important;
+  }
+    .mobile-arrows .splide__arrow:hover{
+      background: #1F5CBF !important;
+      color: #fff !important;
+    }
+
+  .mobile-arrows .splide__arrow svg {
+    fill: #fff;
+  }
+}
   
