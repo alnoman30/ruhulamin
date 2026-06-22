@@ -4,7 +4,7 @@
    page never throws and never blocks the other sections.
    ===================================================================== */
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /* ---------------------------------------------------------------------
    LENIS SMOOTH SCROLL  (single instance — used everywhere)
@@ -376,3 +376,152 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }).mount();
 });
+
+//  footer cta image animation
+
+(() => {
+
+    const footerContent = document.querySelector("#cta .footer-left-content");
+
+    if (!footerContent) return;
+
+
+    gsap.fromTo(
+        footerContent,
+        {
+            clipPath: "inset(0 50% 0 50%)",
+            opacity: 0.4
+        },
+        {
+            clipPath: "inset(0 0% 0 0%)",
+            opacity: 1,
+            duration: 1.6,
+            ease: "expo.out",
+
+            scrollTrigger: {
+                trigger: "#cta",
+                start: "top 80%",
+                toggleActions: "restart none none none",
+
+                onEnter: () => {
+
+                    gsap.to(footerContent, {
+
+                        x: 15,
+
+                        duration: 2.5,
+
+                        ease: "sine.inOut",
+
+                        repeat: -1,
+
+                        yoyo: true,
+
+                        overwrite: false
+
+                    });
+
+                }
+
+            }
+        }
+    );
+
+
+})();
+
+// Global h1, h2 animation
+function headingReveal() {
+
+    const headings = document.querySelectorAll("h1, h2");
+
+
+    headings.forEach((heading) => {
+
+
+        // Skip animation if class exists
+        if (heading.classList.contains("no-heading-animation")) {
+            return;
+        }
+
+
+        const split = new SplitText(heading, {
+            type: "words"
+        });
+
+
+        // Create mask wrapper
+        split.words.forEach((word) => {
+
+            const mask = document.createElement("span");
+
+
+            mask.style.cssText = `
+                display:inline-block;
+                overflow:hidden;
+                vertical-align:top;
+            `;
+
+
+            word.parentNode.insertBefore(mask, word);
+
+            mask.appendChild(word);
+
+
+            word.style.display = "inline-block";
+
+        });
+
+
+
+        // Initial state
+        gsap.set(split.words, {
+
+            yPercent: 110,
+
+            opacity: 0,
+
+            skewY: 4
+
+        });
+
+
+
+        // Reveal
+        gsap.to(split.words, {
+
+            yPercent: 0,
+
+            opacity: 1,
+
+            skewY: 0,
+
+            duration: 1,
+
+            ease: "expo.out",
+
+
+            stagger: {
+                each: 0.06
+            },
+
+
+            scrollTrigger: {
+
+                trigger: heading,
+
+                start: "top 85%",
+
+                once: true
+
+            }
+
+        });
+
+
+    });
+
+}
+
+
+headingReveal();
