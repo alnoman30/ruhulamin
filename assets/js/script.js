@@ -189,47 +189,50 @@ document.querySelectorAll(".magnet-item").forEach((item) => {
 // Hero banner image animation
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Smooth fade + come-up animation on load
-    gsap.from("#hero-main-person, #hero-ai-tool", {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        ease: "power3.out",
-        stagger: 0.15
-    });
+    // Check if GSAP exists
+    if (typeof gsap === "undefined") {
+        console.warn("GSAP is not loaded.");
+        return;
+    }
+
+    const heroPerson = document.querySelector("#hero-main-person");
+    const heroTool = document.querySelector("#hero-ai-tool");
 
     // Main person (chair rocking effect)
-    gsap.to("#hero-main-person", {
-        x: -18,
-        duration: 4,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        transformOrigin: "bottom center"
-    });
+    if (heroPerson) {
+        gsap.to(heroPerson, {
+            x: -18,
+            duration: 4,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            transformOrigin: "bottom center"
+        });
 
-    // Optional subtle body sway
-    gsap.to("#hero-main-person", {
-        rotation: -1.2,
-        duration: 4,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        transformOrigin: "bottom center"
-    });
+        // Optional subtle body sway
+        gsap.to(heroPerson, {
+            rotation: -1.2,
+            duration: 4,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            transformOrigin: "bottom center"
+        });
+    }
 
     // AI Tool floating effect
-    gsap.to("#hero-ai-tool", {
-        y: -12,
-        rotation: 1.5,
-        duration: 2.8,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true
-    });
+    if (heroTool) {
+        gsap.to(heroTool, {
+            y: -12,
+            rotation: 1.5,
+            duration: 2.8,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true
+        });
+    }
 
 });
-
 
 // Counter animation
 document.addEventListener('DOMContentLoaded', () => {
@@ -353,30 +356,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // SplideJS testimonial
-document.addEventListener('DOMContentLoaded', function () {
-  new Splide('#testimonial-carousel', {
-    type: 'slide',
-    perPage: 2,
-    perMove: 1,
-    autoplay: true,
-    interval: 5000,
-    pauseOnHover: false,
-    arrows: false, // desktop
-    pagination: true,
-    speed: 800,
-    gap: '32px',
+document.addEventListener("DOMContentLoaded", function () {
 
-    breakpoints: {
-      768: {
-        perPage: 1,
-        gap: '1rem',
-        pagination: false,
-        arrows: true, // mobile
-      }
-    }
-  }).mount();
+    if (typeof Splide === "undefined") return;
+
+    const testimonialCarousel = document.querySelector("#testimonial-carousel");
+
+    if (!testimonialCarousel) return;
+
+    new Splide(testimonialCarousel, {
+        type: "slide",
+        perPage: 2,
+        perMove: 1,
+        autoplay: true,
+        interval: 5000,
+        pauseOnHover: false,
+        arrows: false,
+        pagination: true,
+        speed: 800,
+        gap: "32px",
+
+        breakpoints: {
+            768: {
+                perPage: 1,
+                gap: "1rem",
+                pagination: false,
+                arrows: true,
+            }
+        }
+    }).mount();
+
 });
-
 //  footer cta image animation
 
 (() => {
@@ -525,3 +535,97 @@ function headingReveal() {
 
 
 headingReveal();
+
+
+// FAQ Accordion js
+document.addEventListener("DOMContentLoaded", () => {
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    const toggle = item.querySelector(".faq-toggle");
+    const content = item.querySelector(".faq-content");
+    const icon = item.querySelector(".faq-icon");
+
+    toggle.addEventListener("click", () => {
+      const isOpen = item.classList.contains("active");
+
+      // Close other accordions
+      faqItems.forEach((otherItem) => {
+        if (otherItem !== item && otherItem.classList.contains("active")) {
+
+          const otherContent = otherItem.querySelector(".faq-content");
+          const otherIcon = otherItem.querySelector(".faq-icon");
+
+          otherItem.classList.remove("active");
+
+          gsap.to(otherContent, {
+            height: 0,
+            opacity: 0,
+            duration: 0.4,
+            ease: "power3.inOut"
+          });
+
+          gsap.to(otherIcon, {
+            rotation: 0,
+            y: 0,
+            scale: 1,
+            duration: 0.25,
+            ease: "power3.out"
+          });
+        }
+      });
+
+
+      if (isOpen) {
+
+        item.classList.remove("active");
+
+        gsap.to(content, {
+          height: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power3.inOut"
+        });
+
+
+        gsap.to(icon, {
+          rotation: 0,
+          y: 0,
+          scale: 1,
+          duration: 0.25,
+          ease: "back.out(1.5)"
+        });
+
+
+      } else {
+
+        item.classList.add("active");
+
+        gsap.to(content, {
+          height: "auto",
+          opacity: 1,
+          duration: 0.45,
+          ease: "power3.inOut"
+        });
+
+
+        // Faster premium icon animation
+        gsap.timeline()
+          .to(icon, {
+            scale: 1.12,
+            y: -2,
+            duration: 0.12,
+            ease: "power2.out"
+          })
+          .to(icon, {
+            rotation: 180,
+            scale: 1,
+            y: 0,
+            duration: 0.3,
+            ease: "back.out(1.8)"
+          });
+
+      }
+    });
+  });
+});
