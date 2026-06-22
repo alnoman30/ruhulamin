@@ -621,3 +621,35 @@ html.lenis body {
   }
 }
   
+.upwork-icon {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+.upwork-icon .icon-dark {
+    display: block;
+}
+
+.upwork-icon .icon-white {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upwork-icon .icon-dark {
+    transition: opacity 0.3s ease;
+}
+
+.btn-secondary:hover .icon-dark {
+    opacity: 0;
+}
+
+.btn-secondary:hover .icon-white {
+    opacity: 1;
+}
+/*  */
