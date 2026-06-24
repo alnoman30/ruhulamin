@@ -83,6 +83,7 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --tracking-widest: 0.1em;
     --radius-sm: 0.25rem;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
@@ -480,6 +481,9 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-\[1px\] {
+    height: 1px;
+  }
   .h-\[100px\] {
     height: 100px;
   }
@@ -558,8 +562,17 @@
   .w-full {
     width: 100%;
   }
+  .max-w-6 {
+    max-width: calc(var(--spacing) * 6);
+  }
   .max-w-6xl {
     max-width: var(--container-6xl);
+  }
+  .max-w-60 {
+    max-width: calc(var(--spacing) * 60);
+  }
+  .max-w-80 {
+    max-width: calc(var(--spacing) * 80);
   }
   .max-w-91 {
     max-width: calc(var(--spacing) * 91);
@@ -575,6 +588,9 @@
   }
   .max-w-100 {
     max-width: calc(var(--spacing) * 100);
+  }
+  .max-w-115 {
+    max-width: calc(var(--spacing) * 115);
   }
   .max-w-146 {
     max-width: calc(var(--spacing) * 146);
@@ -602,6 +618,9 @@
   }
   .max-w-247\.5 {
     max-width: calc(var(--spacing) * 247.5);
+  }
+  .max-w-\[460px\] {
+    max-width: 460px;
   }
   .max-w-full {
     max-width: 100%;
@@ -882,6 +901,12 @@
       border-color: color-mix(in oklab, var(--color-white) 20%, transparent);
     }
   }
+  .border-white\/25 {
+    border-color: color-mix(in srgb, #ffffff 25%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      border-color: color-mix(in oklab, var(--color-white) 25%, transparent);
+    }
+  }
   .bg-\[\#0C2745\] {
     background-color: #0C2745;
   }
@@ -944,6 +969,18 @@
   }
   .bg-white {
     background-color: var(--color-white);
+  }
+  .bg-white\/5 {
+    background-color: color-mix(in srgb, #ffffff 5%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 5%, transparent);
+    }
+  }
+  .bg-white\/20 {
+    background-color: color-mix(in srgb, #ffffff 20%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+    }
   }
   .bg-linear-to-b {
     --tw-gradient-position: to bottom;
@@ -1056,6 +1093,9 @@
   .py-16 {
     padding-block: calc(var(--spacing) * 16);
   }
+  .py-20 {
+    padding-block: calc(var(--spacing) * 20);
+  }
   .pt-3 {
     padding-top: calc(var(--spacing) * 3);
   }
@@ -1071,8 +1111,14 @@
   .pr-2\.5 {
     padding-right: calc(var(--spacing) * 2.5);
   }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
   .pb-3 {
     padding-bottom: calc(var(--spacing) * 3);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
   }
   .pb-6 {
     padding-bottom: calc(var(--spacing) * 6);
@@ -1189,6 +1235,16 @@
     --tw-font-weight: var(--font-weight-semibold);
     font-weight: var(--font-weight-semibold);
   }
+  .tracking-widest {
+    --tw-tracking: var(--tracking-widest);
+    letter-spacing: var(--tracking-widest);
+  }
+  .whitespace-nowrap {
+    white-space: nowrap;
+  }
+  .text-\[\#0C2745\] {
+    color: #0C2745;
+  }
   .text-\[\#101010\] {
     color: #101010;
   }
@@ -1243,6 +1299,9 @@
   .opacity-60 {
     opacity: 60%;
   }
+  .opacity-90 {
+    opacity: 90%;
+  }
   .opacity-100 {
     opacity: 100%;
   }
@@ -1264,6 +1323,10 @@
   }
   .shadow-\[4px_20px_48px_0_rgba\(0\,0\,0\,0\.10\)\] {
     --tw-shadow: 4px 20px 48px 0 var(--tw-shadow-color, rgba(0,0,0,0.10));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .ring-4 {
@@ -1440,6 +1503,16 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-white);
+      }
+    }
+  }
+  .hover\:bg-white\/10 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: color-mix(in srgb, #ffffff 10%, transparent);
+        @supports (color: color-mix(in lab, red, red)) {
+          background-color: color-mix(in oklab, var(--color-white) 10%, transparent);
+        }
       }
     }
   }
@@ -1800,9 +1873,19 @@
       padding-inline: calc(var(--spacing) * 4);
     }
   }
+  .sm\:px-5 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 5);
+    }
+  }
   .sm\:py-1 {
     @media (width >= 40rem) {
       padding-block: calc(var(--spacing) * 1);
+    }
+  }
+  .sm\:py-2\.5 {
+    @media (width >= 40rem) {
+      padding-block: calc(var(--spacing) * 2.5);
     }
   }
   .sm\:py-6 {
@@ -2115,6 +2198,11 @@
   .md\:w-auto {
     @media (width >= 48rem) {
       width: auto;
+    }
+  }
+  .md\:max-w-115 {
+    @media (width >= 48rem) {
+      max-width: calc(var(--spacing) * 115);
     }
   }
   .md\:max-w-135 {
@@ -2617,9 +2705,24 @@
       height: 160px;
     }
   }
+  .lg\:w-1 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 1);
+    }
+  }
   .lg\:w-1\/2 {
     @media (width >= 64rem) {
       width: calc(1 / 2 * 100%);
+    }
+  }
+  .lg\:w-15 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 15);
+    }
+  }
+  .lg\:w-16 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 16);
     }
   }
   .lg\:w-18\.25 {
@@ -2630,6 +2733,11 @@
   .lg\:w-24 {
     @media (width >= 64rem) {
       width: calc(var(--spacing) * 24);
+    }
+  }
+  .lg\:w-150 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 150);
     }
   }
   .lg\:w-\[40\%\] {
@@ -2645,6 +2753,11 @@
   .lg\:w-\[160px\] {
     @media (width >= 64rem) {
       width: 160px;
+    }
+  }
+  .lg\:w-\[600px\] {
+    @media (width >= 64rem) {
+      width: 600px;
     }
   }
   .lg\:w-auto {
@@ -3474,6 +3587,10 @@ html.lenis, html.lenis body {
   syntax: "*";
   inherits: false;
 }
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
 @property --tw-shadow {
   syntax: "*";
   inherits: false;
@@ -3672,6 +3789,7 @@ html.lenis, html.lenis body {
       --tw-gradient-to-position: 100%;
       --tw-leading: initial;
       --tw-font-weight: initial;
+      --tw-tracking: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
       --tw-shadow-alpha: 100%;
