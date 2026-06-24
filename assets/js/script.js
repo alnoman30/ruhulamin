@@ -390,54 +390,63 @@ document.addEventListener("DOMContentLoaded", function () {
 //  footer cta image animation
 
 (() => {
+    gsap.registerPlugin(ScrollTrigger);
 
-    const footerContent = document.querySelector("#cta .footer-left-content");
+    gsap.utils.toArray(".reveal-image").forEach((image) => {
 
-    if (!footerContent) return;
+        let floatTween;
 
+        const tl = gsap.timeline({
+            paused: true,
+            onComplete: () => {
 
-    gsap.fromTo(
-        footerContent,
-        {
-            clipPath: "inset(0 50% 0 50%)",
-            opacity: 0.4
-        },
-        {
-            clipPath: "inset(0 0% 0 0%)",
-            opacity: 1,
-            duration: 1.6,
-            ease: "expo.out",
-
-            scrollTrigger: {
-                trigger: "#cta",
-                start: "top 80%",
-                toggleActions: "restart none none none",
-
-                onEnter: () => {
-
-                    gsap.to(footerContent, {
-
-                        x: 15,
-
+                if (!floatTween) {
+                    floatTween = gsap.to(image, {
+                        x: "+=15",
                         duration: 2.5,
-
                         ease: "sine.inOut",
-
                         repeat: -1,
-
-                        yoyo: true,
-
-                        overwrite: false
-
+                        yoyo: true
                     });
-
                 }
-
             }
-        }
-    );
+        });
 
+        tl.fromTo(
+            image,
+            {
+                clipPath: "inset(0 50% 0 50%)",
+                opacity: 0.4
+            },
+            {
+                clipPath: "inset(0 0% 0 0%)",
+                opacity: 1,
+                duration: 1.6,
+                ease: "expo.out"
+            }
+        );
 
+        ScrollTrigger.create({
+            trigger: image,
+            start: "top 80%",
+
+            onEnter: () => {
+                tl.restart();
+            },
+
+            onEnterBack: () => {
+                tl.restart();
+            },
+
+            onLeave: () => {
+                if (floatTween) floatTween.pause();
+            },
+
+            onLeaveBack: () => {
+                if (floatTween) floatTween.pause();
+            }
+        });
+    });
 })();
 
 // Global h1, h2 animation
@@ -628,4 +637,49 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+});
+
+// about page card open animation
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.utils.toArray(".timeline-item").forEach((item) => {
+
+  const dot = item.querySelector(".timeline-dot");
+  const arrow = item.querySelector(".timeline-arrow");
+
+  const year = item.querySelector(".timeline-year");
+  const title = item.querySelector(".timeline-title");
+  const text = item.querySelector(".timeline-text");
+
+  const content = [year, title, text];
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: item,
+      start: "top 80%",
+      end: "top 30%",
+      scrub: true
+    }
+  });
+
+  tl.fromTo(item,
+    { opacity: 0, y: 60 },
+    { opacity: 1, y: 0, duration: 1 }
+  )
+  .fromTo(content,
+    { opacity: 0 },   // ❌ removed x movement
+    { opacity: 1, stagger: 0.15, duration: 1 },
+    0
+  )
+  .fromTo(dot,
+    { backgroundColor: "rgba(255,255,255,.3)", scale: 1 },
+    { backgroundColor: "#ffffff", scale: 1.6, duration: 1 },
+    0
+  )
+  .fromTo(arrow,
+    { scaleY: 0, y: -20, opacity: 0.2, transformOrigin: "top center" },
+    { scaleY: 1, y: 0, opacity: 0.7, duration: 1 },
+    0
+  );
+
 });

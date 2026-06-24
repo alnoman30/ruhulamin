@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 @font-face {
   font-family: 'Clash Grotesk';
   src: url('../fonts/ClashGrotesk-Light.ttf') format('truetype');
@@ -48,6 +48,14 @@
   font-display: swap;
 }
 
+@font-face {
+    font-family: 'Aileron';
+    src: url('../fonts/Aileron-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 @import "tailwindcss";
 
 
@@ -65,7 +73,9 @@
 
   --font-clash: "Clash Grotesk";
   --font-relevance: 'Relevance-trial';
+  --font-aileron: 'Aileron';
   --font-inter: "Inter", sans-serif;
+  --font-urbanist: "Urbanist", sans-serif;
 }
 
 
@@ -782,4 +792,19 @@ html.lenis body {
     .footer-menu-icon {
         width: 24px;
     }
+}
+
+/*  */
+
+.timeline-item{
+  will-change: transform, opacity;
+}
+
+.timeline-dot{
+  will-change: transform, background-color;
+  transition: background-color .3s ease;
+}
+
+.timeline-arrow{
+  will-change: transform, opacity;
 }
