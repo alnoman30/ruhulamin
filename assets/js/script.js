@@ -683,3 +683,6 @@ gsap.utils.toArray(".timeline-item").forEach((item) => {
   );
 
 });
+
+
+// projects
